@@ -58,10 +58,10 @@ RUN set -x;\
 
 # Install Odoo
 ENV ODOO_VERSION 13.0
-ARG ODOO_RELEASE=20190816
-ARG ODOO_SHA=ba99de9cd0a6f0b4ff270fd315b3dd023711a962
+ARG ODOO_RELEASE=20191111
+ARG ODOO_SHA=c58fa0fd68f57a4b831b9a334cb7f49ae2a2f3fe
 RUN set -x; \
-        curl -o odoo.deb -sSL http://nightly.odoo.com/master/nightly/deb/odoo_13.0alpha1.20190906_all.deb \
+        curl -o odoo.deb -sSL https://nightly.odoo.com/13.0/nightly/deb/odoo_13.0.20191111_all.deb \
         && echo "${ODOO_SHA} odoo.deb" | sha1sum -c - \
         && dpkg --force-depends -i odoo.deb \
         && apt-get update \
@@ -70,9 +70,10 @@ RUN set -x; \
 
 # Copy entrypoint script and Odoo configuration file
 RUN pip3 install num2words xlwt
-COPY ./entrypoint.sh /
 COPY ./odoo.conf /etc/odoo/
 RUN chown odoo /etc/odoo/odoo.conf
+COPY opusvl-entrypoint.py /
+RUN chmod a+rx /opusvl-entrypoint.py
 
 # Mount /var/lib/odoo to allow restoring filestore and /mnt/extra-addons for users addons
 RUN mkdir -p /mnt/extra-addons \
@@ -88,5 +89,6 @@ ENV ODOO_RC /etc/odoo/odoo.conf
 # Set default user when running the container
 USER odoo
 
-ENTRYPOINT ["/entrypoint.sh"]
+
+ENTRYPOINT ["/opusvl-entrypoint.py"]
 CMD ["odoo"]
