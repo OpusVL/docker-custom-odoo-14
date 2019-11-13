@@ -70,6 +70,7 @@ RUN set -x; \
 
 # Copy entrypoint script and Odoo configuration file
 RUN pip3 install num2words xlwt
+COPY ./entrypoint.sh /
 COPY ./odoo.conf /etc/odoo/
 RUN chown odoo /etc/odoo/odoo.conf
 COPY opusvl-entrypoint.py /
@@ -89,6 +90,5 @@ ENV ODOO_RC /etc/odoo/odoo.conf
 # Set default user when running the container
 USER odoo
 
-
-ENTRYPOINT ["/opusvl-entrypoint.py"]
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["odoo"]
