@@ -98,7 +98,7 @@ RUN mkdir -p /mnt/extra-addons \
 RUN mkdir /mnt/extra-addons-bundles \
         && chmod -R 755 /mnt/extra-addons-bundles
 
-VOLUME ["/var/lib/odoo", "/mnt/extra-addons"]
+VOLUME ["/var/lib/odoo"]
 
 # Expose Odoo services
 EXPOSE 8069 8071
