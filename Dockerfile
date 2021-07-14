@@ -29,6 +29,7 @@ RUN set -x; \
             python3-slugify \
             python3-vobject \
             python3-watchdog \
+            python3-xlrd \
             python3-xlwt \
             xz-utils \
             fonts-dejavu \
