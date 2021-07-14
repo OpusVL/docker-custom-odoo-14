@@ -6,6 +6,15 @@ are built for production.
 
 [![Docker Repository on Quay](https://quay.io/repository/opusvl/custom-odoo-14/status "Docker Repository on Quay")](https://quay.io/repository/opusvl/custom-odoo-14)
 
+# Building
+
+```!sh
+export REPO_VERSION=vN
+export ODOO_RELEASE=20210713
+export ODOO_SHA=59408eba9273bf60cb34759b17816553bc583303
+./build-and-push.sh
+```
+
 # Locales
 
 Locales are generated for en_GB, and are set as default in the environment.
