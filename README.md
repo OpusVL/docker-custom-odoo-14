@@ -4,7 +4,7 @@ An Odoo docker image with extended capabilities and fixes over the official one.
 Some of these are development aids, while some make a difference to how images
 are built for production.
 
-[![Docker Repository on Quay](https://quay.io/repository/opusvl/custom-odoo-13/status "Docker Repository on Quay")](https://quay.io/repository/opusvl/odoo-custom)
+[![Docker Repository on Quay](https://quay.io/repository/opusvl/custom-odoo-14/status "Docker Repository on Quay")](https://quay.io/repository/opusvl/custom-odoo-14)
 
 # Locales
 
@@ -58,7 +58,7 @@ There is a new entrypoint `opusvl-entrypoint.py` which augments environment vari
 
 # Copyright and License
 
-Copyright (C) 2017  Opus Vision Limited
+Copyright (C) 2021  Opus Vision Limited
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published by

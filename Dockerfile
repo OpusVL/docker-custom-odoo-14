@@ -1,6 +1,8 @@
 FROM debian:buster-slim
 MAINTAINER Odoo S.A. <info@odoo.com>
 
+SHELL ["/bin/bash", "-xo", "pipefail", "-c"]
+
 # Generate locale C.UTF-8 for postgres and general locale data
 ENV LANG C.UTF-8
 
@@ -18,13 +20,16 @@ RUN set -x; \
             npm \
             python3-num2words \
             python3-pip \
+            python3-pdfminer \
             python3-phonenumbers \
             python3-pyldap \
             python3-qrcode \
             python3-renderpm \
             python3-setuptools \
+            python3-slugify \
             python3-vobject \
             python3-watchdog \
+            python3-xlrd \
             python3-xlwt \
             xz-utils \
             fonts-dejavu \
@@ -54,20 +59,17 @@ RUN set -x; \
         && rm -rf /var/lib/apt/lists/*
 
 # Install rtlcss (on Debian buster)
-RUN set -x; \
-    npm install -g rtlcss
+RUN npm install -g rtlcss
 
 # Install Odoo
-ENV ODOO_VERSION 13.0
-ARG ODOO_RELEASE=20191113
-ARG ODOO_SHA=4a73c74643a7fb9afbc9ff142088e96dc94c9364
-RUN set -x; \
-        curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
-        && echo "${ODOO_SHA} odoo.deb" | sha1sum -c - \
-        && dpkg --force-depends -i odoo.deb \
-        && apt-get update \
-        && apt-get -y install -f --no-install-recommends \
-        && rm -rf /var/lib/apt/lists/* odoo.deb
+ENV ODOO_VERSION 14.0
+ARG ODOO_RELEASE=20210713
+ARG ODOO_SHA=59408eba9273bf60cb34759b17816553bc583303
+RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
+    && echo "${ODOO_SHA} odoo.deb" | sha1sum -c - \
+    && apt-get update \
+    && apt-get -y install --no-install-recommends ./odoo.deb \
+    && rm -rf /var/lib/apt/lists/* odoo.deb
 
 # Install barcode font
 COPY pfbfer.zip /root/pfbfer.zip
@@ -101,7 +103,7 @@ RUN mkdir /mnt/extra-addons-bundles \
 VOLUME ["/var/lib/odoo"]
 
 # Expose Odoo services
-EXPOSE 8069 8071
+EXPOSE 8069 8071 8072
 
 # Set the default config file
 ENV ODOO_RC /etc/odoo/odoo.conf
