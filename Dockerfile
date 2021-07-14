@@ -113,7 +113,6 @@ COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
 USER odoo
 
 ENTRYPOINT ["/opusvl-entrypoint.py"]
-CMD ["odoo"]
 
 ONBUILD USER root
 ONBUILD COPY ./addon-bundles/ /mnt/extra-addons-bundles/
