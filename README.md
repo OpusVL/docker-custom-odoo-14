@@ -6,6 +6,34 @@ are built for production.
 
 [![Docker Repository on Quay](https://quay.io/repository/opusvl/custom-odoo-14/status "Docker Repository on Quay")](https://quay.io/repository/opusvl/custom-odoo-14)
 
+# Releasing this layer
+
+```!sh
+git fetch
+git status
+```
+
+Make sure that the repo is completely clean (all changes committed,
+stashed or moved out of the way).
+
+```!sh
+git tag
+```
+
+Work out from the output of `git tag` what the next tag is going to be,
+and set it in REPO_VERSION in the below:
+
+```!sh
+export REPO_VERSION=vN
+./build-and-push-all.sh
+git tag "$REPO_VERSION"
+git push origin "$REPO_VERSION"
+```
+
+Future improvement: write another outer script that will clone a specific
+tag in a tempdir, and release what was pushed to git rather than what
+happens to be in your working copy - or make CI do it on new tag/PR/whatever.
+
 # Locales
 
 Locales are generated for en_GB, and are set as default in the environment.
@@ -33,8 +61,10 @@ Create a git repo with the following structure:
 The Dockerfile might have something like this in it:
 
 ```
-FROM quay.io/opusvl/odoo-custom:10.0
+FROM quay.io/opusvl/custom-odoo-14:v1-release-20210713
 ```
+
+Supported Odoo nightlies are listed in odoo-revisions.tsv
 
 # Run Odoo from a git checkout
 
