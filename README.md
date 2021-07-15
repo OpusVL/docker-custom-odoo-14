@@ -25,7 +25,7 @@ and set it in REPO_VERSION in the below:
 
 ```!sh
 export REPO_VERSION=vN
-./build-and-push.sh
+./build-and-push-all.sh
 git tag REPO_VERSION
 ```
 
