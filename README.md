@@ -6,7 +6,7 @@ are built for production.
 
 [![Docker Repository on Quay](https://quay.io/repository/opusvl/custom-odoo-14/status "Docker Repository on Quay")](https://quay.io/repository/opusvl/custom-odoo-14)
 
-# Releasing
+# Releasing this layer
 
 ```!sh
 git fetch
