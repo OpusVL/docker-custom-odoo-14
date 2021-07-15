@@ -60,8 +60,10 @@ Create a git repo with the following structure:
 The Dockerfile might have something like this in it:
 
 ```
-FROM quay.io/opusvl/odoo-custom:10.0
+FROM quay.io/opusvl/custom-odoo-14:v1-release-20210713
 ```
+
+Supported Odoo nightlies are listed in odoo-revisions.tsv
 
 # Run Odoo from a git checkout
 
