@@ -9,10 +9,7 @@ are built for production.
 # Building
 
 ```!sh
-export REPO_VERSION=vN
-export ODOO_RELEASE=20210713
-export ODOO_SHA=59408eba9273bf60cb34759b17816553bc583303
-./build-and-push.sh
+REPO_VERSION=vN ./build-and-push.sh
 ```
 
 # Locales
