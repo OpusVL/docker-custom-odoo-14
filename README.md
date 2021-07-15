@@ -6,11 +6,32 @@ are built for production.
 
 [![Docker Repository on Quay](https://quay.io/repository/opusvl/custom-odoo-14/status "Docker Repository on Quay")](https://quay.io/repository/opusvl/custom-odoo-14)
 
-# Building
+# Releasing
 
 ```!sh
-REPO_VERSION=vN ./build-and-push.sh
+git fetch
+git status
 ```
+
+Make sure that the repo is completely clean (all changes committed,
+stashed or moved out of the way).
+
+```!sh
+git tag
+```
+
+Work out from the output of `git tag` what the next tag is going to be,
+and set it in REPO_VERSION in the below:
+
+```!sh
+export REPO_VERSION=vN
+./build-and-push.sh
+git tag REPO_VERSION
+```
+
+Future improvement: write another outer script that will clone a specific
+tag in a tempdir, and release what was pushed to git rather than what
+happens to be in your working copy - or make CI do it on new tag/PR/whatever.
 
 # Locales
 
