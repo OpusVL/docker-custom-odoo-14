@@ -34,6 +34,12 @@ Future improvement: write another outer script that will clone a specific
 tag in a tempdir, and release what was pushed to git rather than what
 happens to be in your working copy - or make CI do it on new tag/PR/whatever.
 
+# Fixing volume permissions
+
+```#!sh
+docker-compose run --rm -u root odoo /fixperms
+```
+
 # Locales
 
 Locales are generated for en_GB, and are set as default in the environment.

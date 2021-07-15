@@ -110,6 +110,10 @@ ENV ODOO_RC /etc/odoo/odoo.conf
 
 COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
 
+COPY fixperms /fixperms
+RUN chmod +x /fixperms
+
+
 # Set default user when running the container
 USER odoo
 

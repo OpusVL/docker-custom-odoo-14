@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+if [ "$(id -u)" != 0 ]
+then
+    echo "$0: WARNING: You aren't running as superuser so this might not work" >&2
+fi
+
+chown -R odoo:odoo /var/lib/odoo
